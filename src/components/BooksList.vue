@@ -1,6 +1,11 @@
 <template>
     <v-container>
 
+        <!-- show logo image  -->
+         <!-- <v-img src="../assets/logo.png" max-height="100" contain></v-img> -->
+
+
+
         <v-row>
             <v-col cols="12" md="5" lg="4">
                 <v-text-field prepend-inner-icon="mdi-magnify" v-model="search" label="Search" outlined dense

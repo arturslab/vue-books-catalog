@@ -104,7 +104,8 @@ export default {
     },
     methods: {
         bookImage(book) {
-            return new URL('../assets/images/' + book.image, import.meta.url).href;
+            // return new URL('../assets/' + book.image, import.meta.url).href;
+            return new URL('/images/' + book.image, import.meta.url).href;
         },
         swapCard() {
             if (this.isCol)
