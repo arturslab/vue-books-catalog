@@ -1,3 +1,16 @@
+![VUE Books Catalog](img/github_header_-_vue_books_catalog.png)
+
+# VUE Books Catalog
+
+## About This Site
+
+VUE Books Catalog is a ready-to-run book catalog site. The project was created to demonstrate how easily a VUE project hosted in a GitHub repository can be integrated and instantly publish changes from the repository to the books.co.pl site using Netlify (continuous integration). My goal was to create a simple VUE application without a prepared backend. Books information is stored in a single JSON file (you can easily change this to using backend endpoints if you want). 
+
+This project uses a VUE 3 with vuetify. You can see working site at [books.co.pl](https://books.co.pl)
+
+![books.co.pl](img/github_img_-_live_website.png)
+
+
 # Vuetify (Default)
 
 This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
