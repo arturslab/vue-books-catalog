@@ -108,6 +108,9 @@ export default {
         starRatingSize: {
             type: String,
             default: "x-smal"
+        },
+        blankImage: {
+            type: String,
         }
     },
     data() {
@@ -119,9 +122,6 @@ export default {
         imageHeight() {
             return this.isCol ? 200 : 200;
         },
-        blankImage() {
-            return new URL('/images/blank_image.png', import.meta.url).href;
-        }
     },
     methods: {
         bookImage(book) {

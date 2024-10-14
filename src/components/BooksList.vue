@@ -39,7 +39,7 @@
             <v-row v-if="filteredBooks.length">
                 <v-col cols="12" :md="isCol ? 6 : 12" :lg="isCol ? 4 : 12" v-for="book in filteredBooks" :key="book.id"
                     class="d-flex flex-column">
-                    <BookItem :book="book" :is-col="isCol" :starRatingSize="starRatingSize" />
+                    <BookItem :blank-image="blankImage" :book="book" :is-col="isCol" :star-rating-size="starRatingSize" />
                 </v-col>
             </v-row>
 
@@ -69,11 +69,13 @@ export default {
             isCol: true,
             categories: [],
             highlightColor: '#ff1093',
-            inactiveColor: 'grey-lighten-1'
+            inactiveColor: 'grey-lighten-1',
+            blankImage: '',
         };
     },
     created() {
         this.fetchBooks();
+        this.blankImage = new URL('/images/blank.png', import.meta.url).href;
     },
     methods: {
 
