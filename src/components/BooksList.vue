@@ -18,14 +18,14 @@
                     <v-tooltip text="Switch to Vertical Cards">
                         <template v-slot:activator="{ props }">
                             <v-btn v-bind="props" icon="mdi-view-grid" @click="isCol = true" :class="{ actived: isCol }"
-                                :color="isCol ? '#ff1093' : '#ffffff'"></v-btn>
+                                :color="isCol ? highlightColor : inactiveColor"></v-btn>
                         </template>
                     </v-tooltip>
 
                     <v-tooltip text="Switch to Horizontal Cards">
                         <template v-slot:activator="{ props }">
                             <v-btn v-bind="props" icon="mdi-view-sequential" @click="isCol = false"
-                                :color="!isCol ? '#ff1093' : '#ffffff'"></v-btn>
+                                :color="!isCol ? highlightColor : inactiveColor"></v-btn>
                         </template>
                     </v-tooltip>
 
@@ -39,7 +39,7 @@
             <v-row v-if="filteredBooks.length">
                 <v-col cols="12" :md="isCol ? 6 : 12" :lg="isCol ? 4 : 12" v-for="book in filteredBooks" :key="book.id"
                     class="d-flex flex-column">
-                    <BookItem :book="book" :is-col="isCol" />
+                    <BookItem :book="book" :is-col="isCol" :starRatingSize="starRatingSize" />
                 </v-col>
             </v-row>
 
@@ -68,6 +68,8 @@ export default {
             drawer: false,
             isCol: true,
             categories: [],
+            highlightColor: '#ff1093',
+            inactiveColor: 'grey-lighten-1'
         };
     },
     created() {
@@ -142,7 +144,13 @@ export default {
                 });
                 return acc;
             }, []);
-        }
+        },
+        starRatingSize() {
+            if(this.$vuetify.display.sm) return "medium";
+            if(this.$vuetify.display.md) return "medium";
+            if(this.$vuetify.display.xlAndUp) return "medium";
+            return "x-small";
+        },
     },
     watch: {
         categories() {

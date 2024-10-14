@@ -2,21 +2,21 @@
     <v-hover v-slot="{ isHovering, props }">
         <v-card :height="isCol ? '100%' : 'auto'" @click="swapCard" :elevation="isHovering ? 12 : 2" v-bind="props">
 
-            <v-row no-gutters v-if="!showDescription" class="fill-height">
-
-                <v-col cols="12" md="6" :lg="isCol ? 4 : 2">
+            <v-row no-gutters v-if="!showDescription" class="fill-height text-grey-lighten-1">
+                <v-col v-if="isCol" cols="3" sm="4" lg="3">
                     <v-img :src="bookImage(book)" aspect-ratio="8/12" :max-height="imageHeight"
                         class="ma-2 text-left"></v-img>
 
                     <div class="text-center">
-                        <v-rating :model-value="calculateRating(book.rating)" :length="5" :size="25"
-                            active-color="orange-lighten-1" half-increments color="grey-darken-2"></v-rating>
+                        <v-rating :model-value="calculateRating(book.rating)" :length="5" :size="starRatingSize"
+                            density="compact" active-color="orange-lighten-1" half-increments
+                            color="grey-darken-2"></v-rating>
                     </div>
                 </v-col>
 
-                <v-col cols="12" md="6" :lg="isCol ? 8 : 10" class="d-flex flex-column">
+                <v-col :cols="isCol ? 9 : 12" sm="8" :lg="isCol ? 8 : 9" class="d-flex flex-column">
                     <div class="fill-height">
-                        <v-card-title class="text-h6">
+                        <v-card-title class="card--title text-grey-lighten-2">
                             {{ book.title }}
                         </v-card-title>
 
@@ -33,28 +33,41 @@
                             <div class="ma-1 mt-4">
                                 <v-tooltip text="Publish Date (First Publish Date)">
                                     <template v-slot:activator="{ props }">
-                                        <span class="mr-4" v-bind="props"><v-icon icon="mdi-calendar"></v-icon> {{
-                                            book.published_year }} ({{ book.first_published_year }})</span>
+                                        <span class="mr-4" v-bind="props">
+                                            <v-icon icon="mdi-calendar"></v-icon>
+                                            {{ book.published_year }} ({{ book.first_published_year }})
+                                        </span>
                                     </template>
                                 </v-tooltip>
 
                                 <v-tooltip text="Pages">
                                     <template v-slot:activator="{ props }">
-                                        <span class="mr-4" v-bind="props"><v-icon
-                                                icon="mdi-book-open-page-variant-outline"></v-icon> {{
-                                                    book.pages }}</span>
+                                        <span class="mr-4" v-bind="props">
+                                            <v-icon color="grey" icon="mdi-book-open-page-variant-outline"></v-icon>
+                                            {{ book.pages }}
+                                        </span>
                                     </template>
                                 </v-tooltip>
-
                             </div>
 
-                            <p v-if="!isCol" class="mt-4">{{ book.description }}</p>
+                            <div class="ma-1 mt-4" v-if="book.store">
+                                <v-tooltip text="Store">
+                                    <template v-slot:activator="{ props }">
+                                        <span class="mr-4" v-bind="props">
+                                            <v-icon icon="mdi-store"></v-icon>
+                                            {{ book.store }}
+                                        </span>
+                                    </template>
+                                </v-tooltip>
+                            </div>
+
                         </v-card-text>
 
                         <div class="align-self-center">
                             <v-card-actions>
-                                <v-btn text :class="{ 'show-btns': isHovering }">{{ showDescription ? 'Hide' : 'Show' }}
-                                    description</v-btn>
+                                <v-btn text :class="{ 'show-btns': isHovering }">
+                                    {{ showDescription ? 'Hide' : 'Show' }} description
+                                </v-btn>
                             </v-card-actions>
                         </div>
 
@@ -69,8 +82,9 @@
                         {{ book.description }}
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn text :class="{ 'show-btns': isHovering }">{{ showDescription ? 'Hide' : 'Show' }}
-                            description</v-btn>
+                        <v-btn text :class="{ 'show-btns': isHovering }">
+                            {{ showDescription ? 'Hide' : 'Show' }} description
+                        </v-btn>
                     </v-card-actions>
                 </v-col>
             </v-row>
@@ -90,6 +104,10 @@ export default {
         isCol: {
             type: Boolean,
             default: true
+        },
+        starRatingSize: {
+            type: String,
+            default: "x-smal"
         }
     },
     data() {
@@ -100,15 +118,14 @@ export default {
     computed: {
         imageHeight() {
             return this.isCol ? 200 : 200;
-        }
+        },
     },
     methods: {
         bookImage(book) {
             return new URL('/images/' + book.image, import.meta.url).href;
         },
         swapCard() {
-            if (this.isCol)
-                this.showDescription = !this.showDescription;
+            this.showDescription = !this.showDescription;
         },
         calculateRating(rating) {
             return rating / 2;
@@ -120,5 +137,16 @@ export default {
 <style scoped>
 .show-btns {
     color: rgb(255, 16, 147) !important;
+}
+
+.card--title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@media (min-width: 600px) {
+    .card--title {
+        font-size: 1.2rem;
+    }
 }
 </style>
