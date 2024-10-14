@@ -75,7 +75,7 @@ export default {
     },
     created() {
         this.fetchBooks();
-        this.blankImage = new URL('/images/blank.png', import.meta.url).href;
+        this.blankImage = new URL('/images/blank_image.svg', import.meta.url).href;
     },
     methods: {
 
