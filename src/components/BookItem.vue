@@ -4,7 +4,7 @@
 
             <v-row no-gutters v-if="!showDescription" class="fill-height text-grey-lighten-1">
                 <v-col v-if="isCol" cols="3" sm="4" lg="3">
-                    <v-img :lazy-src="blankImage" :src="bookImage(book)" aspect-ratio="8/12" :max-height="imageHeight"
+                    <v-img :src="bookImage(book)" aspect-ratio="8/12" :max-height="imageHeight"
                         class="ma-2 text-left"></v-img>
 
                     <div class="text-center">
@@ -109,9 +109,6 @@ export default {
             type: String,
             default: "x-smal"
         },
-        blankImage: {
-            type: String,
-        }
     },
     data() {
         return {
