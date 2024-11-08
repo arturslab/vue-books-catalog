@@ -2,7 +2,7 @@
   <v-footer height="40" app>
     <a v-for="item in items" :key="item.title" :href="item.href" :title="item.title"
       class="d-inline-block mx-2 social-link" rel="noopener noreferrer" target="_blank">
-      <v-icon :icon="item.icon" :size="item.icon === '$vuetify' ? 24 : 16" />
+      <v-icon :size="item.icon === '$vuetify' ? 24 : 16" >{{ icon[item.icon] }}</v-icon>
     </a>
 
     <div class="text-caption text-disabled" style="position: absolute; right: 16px;">
@@ -14,15 +14,25 @@
 </template>
 
 <script setup>
+// import mdi icon
+import { mdiGithub, mdiWeb } from '@mdi/js'
+
+// define imported icons
+const icon = {
+  github: mdiGithub,
+  web: mdiWeb,
+}
+
+
 const items = [
   {
     title: 'Source code on GitHub',
-    icon: `mdi-github`,
+    icon: `github`,
     href: 'https://github.com/arturslab/vue-books-catalog',
   },
   {
     title: 'Author website',
-    icon: 'mdi-web',
+    icon: 'web',
     href: 'https://melma.pl',
   },
 ]

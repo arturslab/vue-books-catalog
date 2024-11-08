@@ -34,7 +34,7 @@
                                 <v-tooltip text="Publish Date (First Publish Date)">
                                     <template v-slot:activator="{ props }">
                                         <span class="mr-4" v-bind="props">
-                                            <v-icon icon="mdi-calendar"></v-icon>
+                                            <v-icon>{{ icon.calendar }}</v-icon>
                                             {{ book.published_year }} ({{ book.first_published_year }})
                                         </span>
                                     </template>
@@ -43,7 +43,7 @@
                                 <v-tooltip text="Pages">
                                     <template v-slot:activator="{ props }">
                                         <span class="mr-4" v-bind="props">
-                                            <v-icon color="grey" icon="mdi-book-open-page-variant-outline"></v-icon>
+                                            <v-icon color="grey">{{ icon.openPage }}</v-icon>
                                             {{ book.pages }}
                                         </span>
                                     </template>
@@ -54,7 +54,7 @@
                                 <v-tooltip text="Store">
                                     <template v-slot:activator="{ props }">
                                         <span class="mr-4" v-bind="props">
-                                            <v-icon icon="mdi-store"></v-icon>
+                                            <v-icon>{{ icon.store }}</v-icon>
                                             {{ book.store }}
                                         </span>
                                     </template>
@@ -65,7 +65,7 @@
 
                         <div class="align-self-center">
                             <v-card-actions>
-                                <v-btn text :class="{ 'show-btns': isHovering }">
+                                <v-btn text :class="{ 'show-btns': isHovering }" variant="tonal">
                                     {{ showDescription ? 'Hide' : 'Show' }} description
                                 </v-btn>
                             </v-card-actions>
@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import { mdiAccount, mdiCalendar, mdiBookOpenPageVariantOutline, mdiStore } from '@mdi/js'
+
 export default {
     props: {
         book: {
@@ -113,6 +115,12 @@ export default {
     data() {
         return {
             showDescription: false,
+            icon: {
+                account: mdiAccount,
+                calendar: mdiCalendar,
+                openPage: mdiBookOpenPageVariantOutline,
+                store: mdiStore,
+            }
         };
     },
     computed: {

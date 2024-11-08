@@ -2,9 +2,13 @@
     <v-container>
         <v-row>
             <v-col cols="12" md="5" lg="4">
-                <v-text-field prepend-inner-icon="mdi-magnify" v-model="search" label="Search" outlined dense
+                <v-text-field v-model="search" label="Search" outlined dense
                     hide-details single-line clearable @click:clear="clearSearchText"
-                    @input="filterBooksByPhrase"></v-text-field>
+                    @input="filterBooksByPhrase">
+                    <template v-slot:prepend-inner>
+                        <v-icon>{{ icon.magnify }}</v-icon>
+                    </template>
+                </v-text-field>
             </v-col>
 
             <v-col cols="12" md="5" lg="4">
@@ -17,15 +21,19 @@
                 <v-btn-group variant="outlined" divided>
                     <v-tooltip text="Switch to Vertical Cards">
                         <template v-slot:activator="{ props }">
-                            <v-btn v-bind="props" icon="mdi-view-grid" @click="isCol = true" :class="{ actived: isCol }"
-                                :color="isCol ? highlightColor : inactiveColor"></v-btn>
+                            <v-btn v-bind="props" @click="isCol = true" class="p-0" :class="{ actived: isCol }"
+                                :color="isCol ? highlightColor : inactiveColor">
+                                <v-icon size="x-large">{{ icon.viewGrid }}</v-icon>
+                            </v-btn>
                         </template>
                     </v-tooltip>
 
                     <v-tooltip text="Switch to Horizontal Cards">
                         <template v-slot:activator="{ props }">
-                            <v-btn v-bind="props" icon="mdi-view-sequential" @click="isCol = false"
-                                :color="!isCol ? highlightColor : inactiveColor"></v-btn>
+                            <v-btn v-bind="props" @click="isCol = false"
+                                :color="!isCol ? highlightColor : inactiveColor">
+                                <v-icon size="x-large">{{ icon.viewSequential }}</v-icon>
+                            </v-btn>
                         </template>
                     </v-tooltip>
 
@@ -52,6 +60,7 @@
 </template>
 
 <script>
+import { mdiMagnify, mdiViewGrid, mdiViewSequential } from '@mdi/js'
 import json from '@/data/json/books.json';
 import BookItem from './BookItem.vue';
 
@@ -70,6 +79,11 @@ export default {
             categories: [],
             highlightColor: '#ff1093',
             inactiveColor: 'grey-lighten-1',
+            icon: {
+                magnify: mdiMagnify,
+                viewGrid: mdiViewGrid,
+                viewSequential: mdiViewSequential
+            }
         };
     },
     created() {
