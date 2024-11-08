@@ -6,7 +6,7 @@
     </a>
 
     <div class="text-caption text-disabled" style="position: absolute; right: 16px;">
-      V.1.0 
+      V.1.1 
       &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block"><a href="https://melma.pl"
           target="_blank" class="text-decoration-none on-surface">melma.pl</a></span>
     </div>
