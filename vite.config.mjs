@@ -40,7 +40,7 @@ export default defineConfig({
       },
       workbox: {
         cleanupOutdatedCaches: true,
-        globPatterns: ['**/*.{js,css,html,png,jpg,svg,json,vue,woff2,eot,ttf,otf}'],
+        globPatterns: ['**/*.{js,css,html,png,jpg,svg,json,vue,woff2,eot,ttf,otf,webp}'],
       },
       injectRegister: 'auto',
       manifest: {
